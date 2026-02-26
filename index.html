@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PIXEL FRENZY - Main Menu</title>
+    <link rel="stylesheet" href="./css/style.css">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>👾</text></svg>">
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Rubik:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <section id="menu-screen" class="screen active">
+        <h1 class="game-title">PIXEL <br> <span class="highlight">FRENZY</span></h1>
+
+        <div class="arcade-selector" style="margin-bottom: 20px; width: 250px; background: rgba(0,0,0,0.8);">
+            <button class="arrow-btn" onclick="changeStage(-1)">◀</button>
+            <span id="stage-display" class="selector-text">NEON CITY</span>
+            <button class="arrow-btn" onclick="changeStage(1)">▶</button>
+        </div>
+
+        <div class="menu-buttons">
+            <button onclick="showScreen('game-screen')">PLAY</button>
+            <button onclick="showScreen('avatar-screen')">AVATAR</button>
+            <button onclick="showScreen('scores-screen')">RANKINGS</button>
+            <button onclick="showScreen('settings-screen')">SETTINGS</button>
+        </div>
+        <p class="credits">Proyecto GCWEB - Enero Junio 2026</p>
+    </section>
+
+    <section id="settings-screen" class="screen hidden">
+        <h2>SETTINGS</h2>
+        <div class="settings-panel">
+            <div class="setting-item">
+                <label>Volumen Música</label>
+                <input type="range" min="0" max="100" value="50">
+            </div>
+            <div class="setting-item">
+                <label>Volumen SFX</label>
+                <input type="range" min="0" max="100" value="80">
+            </div>
+            <div class="setting-item">
+                <label>Calidad Gráfica</label>
+                <div class="arcade-selector">
+                    <button class="arrow-btn" onclick="changeQuality(-1)">◀</button>
+                    <span id="quality-display" class="selector-text">Alta</span>
+                    <button class="arrow-btn" onclick="changeQuality(1)">▶</button>
+                </div>
+            </div>
+            
+            <div class="setting-item">
+                <label>Tema Visual</label>
+                <div class="arcade-selector">
+                    <button class="arrow-btn" onclick="changeThemeCarousel(-1)">◀</button>
+                    <span id="theme-display" class="selector-text">NEON</span>
+                    <button class="arrow-btn" onclick="changeThemeCarousel(1)">▶</button>
+                </div>
+            </div>
+        </div>
+        <button class="btn-back" onclick="showScreen('menu-screen')">VOLVER</button>
+    </section>
+
+    <section id="avatar-screen" class="screen hidden">
+        <h2>TU PERSONAJE</h2>
+        <div class="avatar-container">
+            <div class="avatar-card selected" onclick="selectAvatar(this)">
+                <div class="avatar-image" style="background-color: #FF4500;"></div>
+                <p>RED</p>
+            </div>
+            <div class="avatar-card" onclick="selectAvatar(this)">
+                <div class="avatar-image" style="background-color: #00F0FF;"></div>
+                <p>CYAN</p>
+            </div>
+            <div class="avatar-card" onclick="selectAvatar(this)">
+                <div class="avatar-image" style="background-color: #32CD32;"></div>
+                <p>GREEN</p>
+            </div>
+        </div>
+        <button class="btn-back" onclick="showScreen('menu-screen')">VOLVER</button>
+    </section>
+
+    <section id="scores-screen" class="screen hidden">
+        <h2>TABLA DE RANKINGS</h2>
+        <ul class="scores-list">
+            <li><span>1. BEKQUEEN</span> <span>99999</span></li>
+            <li><span>2. DIVAD2003</span> <span>85000</span></li>
+            <li><span>3. CASSIE</span> <span>42000</span></li>
+        </ul>
+        <button class="btn-back" onclick="showScreen('menu-screen')">VOLVER</button>
+    </section>
+
+    <section id="game-screen" class="screen hidden">
+        <div class="game-placeholder">
+            <p>Work in progress</p>
+        </div>
+        
+        <div class="hud-top">
+            <div class="score">SCORE: 000</div>
+            <button class="btn-pause" onclick="showScreen('pause-screen')">⏸</button>
+        </div>
+        
+        <div class="controls-hint">Usa W, A, S, D para moverte</div>
+    </section>
+
+    <section id="pause-screen" class="screen hidden overlay">
+        <h2>PAUSA</h2>
+        <button onclick="showScreen('game-screen')">RESUME</button>
+        <button onclick="showScreen('menu-screen')">MAIN MANU</button>
+    </section>
+
+    <script src="./js/main.js"></script>
+</body>
+</html>
