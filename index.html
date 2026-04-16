@@ -7,27 +7,40 @@
     <link rel="stylesheet" href="./css/style.css">
     <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>👾</text></svg>">
     <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Rubik:wght@400;700&display=swap" rel="stylesheet">
+
+    <script type="importmap">
+        {
+            "imports": {
+                "three": "https://unpkg.com/three@0.160.0/build/three.module.js",
+                "three/addons/": "https://unpkg.com/three@0.160.0/examples/jsm/"
+            }
+        }
+    </script>
+
 </head>
 <body>
 
+    <!-- MENÚ PRINCIPAL -->
     <section id="menu-screen" class="screen active">
         <h1 class="game-title">PIXEL <br> <span class="highlight">FRENZY</span></h1>
 
         <div class="arcade-selector" style="margin-bottom: 20px; width: 250px; background: rgba(0,0,0,0.8);">
-            <button class="arrow-btn" onclick="changeStage(-1)">◀</button>
+            <button class="arrow-btn" onclick="window.changeStage(-1)">◀</button>
             <span id="stage-display" class="selector-text">NEON CITY</span>
-            <button class="arrow-btn" onclick="changeStage(1)">▶</button>
+            <button class="arrow-btn" onclick="window.changeStage(1)">▶</button>
         </div>
 
         <div class="menu-buttons">
-            <button onclick="showScreen('game-screen')">PLAY</button>
-            <button onclick="showScreen('avatar-screen')">AVATAR</button>
-            <button onclick="showScreen('scores-screen')">RANKINGS</button>
-            <button onclick="showScreen('settings-screen')">SETTINGS</button>
+            <button onclick="window.showScreen('game-screen')">PLAY</button>
+            <button onclick="window.showScreen('avatar-screen')">AVATAR</button>
+            <button onclick="window.showScreen('scores-screen')">RANKINGS</button>
+            <button onclick="window.showScreen('exercises-screen')">LABORATORIO</button>
+            <button onclick="window.showScreen('settings-screen')">SETTINGS</button>
         </div>
-        <p class="credits">Proyecto GCWEB - Enero Junio 2026</p>
+        <p class="credits">Proyecto GCWEB - Enero Junio 2026 | Rebeca, David, Cassandra</p>
     </section>
 
+    <!-- SETTINGS -->
     <section id="settings-screen" class="screen hidden">
         <h2>SETTINGS</h2>
         <div class="settings-panel">
@@ -42,43 +55,57 @@
             <div class="setting-item">
                 <label>Calidad Gráfica</label>
                 <div class="arcade-selector">
-                    <button class="arrow-btn" onclick="changeQuality(-1)">◀</button>
+                    <button class="arrow-btn" onclick="window.changeQuality(-1)">◀</button>
                     <span id="quality-display" class="selector-text">Alta</span>
-                    <button class="arrow-btn" onclick="changeQuality(1)">▶</button>
+                    <button class="arrow-btn" onclick="window.changeQuality(1)">▶</button>
                 </div>
             </div>
-            
             <div class="setting-item">
                 <label>Tema Visual</label>
                 <div class="arcade-selector">
-                    <button class="arrow-btn" onclick="changeThemeCarousel(-1)">◀</button>
+                    <button class="arrow-btn" onclick="window.changeThemeCarousel(-1)">◀</button>
                     <span id="theme-display" class="selector-text">NEON</span>
-                    <button class="arrow-btn" onclick="changeThemeCarousel(1)">▶</button>
+                    <button class="arrow-btn" onclick="window.changeThemeCarousel(1)">▶</button>
                 </div>
             </div>
         </div>
-        <button class="btn-back" onclick="showScreen('menu-screen')">VOLVER</button>
+        <button class="btn-back" onclick="window.showScreen('menu-screen')">VOLVER</button>
     </section>
 
+    <!-- AVATAR -->
     <section id="avatar-screen" class="screen hidden">
         <h2>TU PERSONAJE</h2>
         <div class="avatar-container">
-            <div class="avatar-card selected" onclick="selectAvatar(this)">
+            <div class="avatar-card selected" onclick="window.selectAvatar(this, '#FF4500')">
                 <div class="avatar-image" style="background-color: #FF4500;"></div>
                 <p>RED</p>
             </div>
-            <div class="avatar-card" onclick="selectAvatar(this)">
+            <div class="avatar-card" onclick="window.selectAvatar(this, '#00F0FF')">
                 <div class="avatar-image" style="background-color: #00F0FF;"></div>
                 <p>CYAN</p>
             </div>
-            <div class="avatar-card" onclick="selectAvatar(this)">
+            <div class="avatar-card" onclick="window.selectAvatar(this, '#32CD32')">
                 <div class="avatar-image" style="background-color: #32CD32;"></div>
                 <p>GREEN</p>
             </div>
+            <div class="avatar-card" onclick="window.selectAvatar(this)" data-model="duck">
+                <div class="avatar-image" style="background-image: url('./assets/icons/duck.png'); background-size: cover; background-position: center;"></div>
+                <p>PATO</p>
+            </div>
+            <div class="avatar-card" onclick="window.selectAvatar(this)" data-model="piggy">
+                <div class="avatar-image" style="background-image: url('./assets/icons/piggy.png'); background-size: cover; background-position: center;"></div>
+                <p>CERDITO</p>
+            </div>
+            <div class="avatar-card" onclick="window.selectAvatar(this)" data-model="cat">
+                <div class="avatar-image" style="background-image: url('./assets/icons/cat.png'); background-size: cover; background-position: center;"></div>
+                <p>GATO</p>
+            </div>
         </div>
-        <button class="btn-back" onclick="showScreen('menu-screen')">VOLVER</button>
+
+        <button class="btn-back" onclick="window.showScreen('menu-screen')">VOLVER</button>
     </section>
 
+    <!-- SCORES -->
     <section id="scores-screen" class="screen hidden">
         <h2>TABLA DE RANKINGS</h2>
         <ul class="scores-list">
@@ -86,28 +113,55 @@
             <li><span>2. DIVAD2003</span> <span>85000</span></li>
             <li><span>3. CASSIE</span> <span>42000</span></li>
         </ul>
-        <button class="btn-back" onclick="showScreen('menu-screen')">VOLVER</button>
+        <button class="btn-back" onclick="window.showScreen('menu-screen')">VOLVER</button>
     </section>
 
-    <section id="game-screen" class="screen hidden">
-        <div class="game-placeholder">
-            <p>Work in progress</p>
+    <!-- EJERCICIOS DE CLASE (30 PTS) -->
+    <section id="exercises-screen" class="screen hidden overlay">
+        <h2>EJERCICIOS DE CLASE</h2>
+        <div class="exercises-grid">
+            <div class="exercise-card">
+                <div class="exercise-canvas-container" id="ej1-container"></div>
+                <p>Ej 1: Geometrías</p>
+            </div>
+            <div class="exercise-card">
+                <div class="exercise-canvas-container" id="ej2-container"></div>
+                <p>Ej 2: Texturas</p>
+            </div>
+            <div class="exercise-card">
+                <div class="exercise-canvas-container" id="ej3-container"></div>
+                <p>Ej 3: Materiales</p>
+            </div>
+            <div class="exercise-card">
+                <div class="exercise-canvas-container" id="ej4-container"></div>
+                <p>Ej 4: Iluminación</p>
+            </div>
         </div>
+        <button class="btn-back" onclick="window.showScreen('menu-screen')">VOLVER</button>
+    </section>
+
+    <!-- GAME SCREEN -->
+    <section id="game-screen" class="screen hidden">
+        <div id="threejs-container"></div>
         
         <div class="hud-top">
-            <div class="score">SCORE: 000</div>
-            <button class="btn-pause" onclick="showScreen('pause-screen')">⏸</button>
+            <div class="score">CONECTADOS: <span id="players-count">1</span></div>
+            <button class="btn-pause" onclick="window.showScreen('pause-screen')">⏸ PAUSA</button>
         </div>
         
-        <div class="controls-hint">Usa W, A, S, D para moverte</div>
+        <div class="controls-hint">W, A, S, D: Mover | Usa el multijugador abriendo otra pestaña</div>
     </section>
 
+    <!-- PAUSA -->
     <section id="pause-screen" class="screen hidden overlay">
         <h2>PAUSA</h2>
-        <button onclick="showScreen('game-screen')">RESUME</button>
-        <button onclick="showScreen('menu-screen')">MAIN MANU</button>
+        <button onclick="window.showScreen('game-screen')">RESUMIR</button>
+        <button onclick="window.showScreen('menu-screen')">SALIR AL MENÚ</button>
     </section>
 
+    <script src="http://localhost:3000/socket.io/socket.io.js"></script>
     <script src="./js/main.js"></script>
+    <script type="module" src="./js/game.js"></script>
+
 </body>
 </html>
